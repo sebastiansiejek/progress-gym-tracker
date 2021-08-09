@@ -1147,6 +1147,13 @@
     resolve-global "1.0.0"
     yargs "^17.0.0"
 
+"@commitlint/config-conventional@^13.1.0":
+  version "13.1.0"
+  resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-13.1.0.tgz#f02871d50c73db0a31b777231f49203b964d9d59"
+  integrity sha512-zukJXqdr6jtMiVRy3tTHmwgKcUMGfqKDEskRigc5W3k2aYF4gBAtCEjMAJGZgSQE4DMcHeok0pEV2ANmTpb0cw==
+  dependencies:
+    conventional-changelog-conventionalcommits "^4.3.1"
+
 "@commitlint/ensure@^13.1.0":
   version "13.1.0"
   resolved "https://registry.yarnpkg.com/@commitlint/ensure/-/ensure-13.1.0.tgz#057a325b54f104cbeed2a26bacb5eec29298e7d5"
@@ -2536,6 +2543,15 @@ conventional-changelog-angular@^5.0.11:
     compare-func "^2.0.0"
     q "^1.5.1"
 
+conventional-changelog-conventionalcommits@^4.3.1:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/conventional-changelog-conventionalcommits/-/conventional-changelog-conventionalcommits-4.6.0.tgz#7fc17211dbca160acf24687bd2fdd5fd767750eb"
+  integrity sha512-sj9tj3z5cnHaSJCYObA9nISf7eq/YjscLPoq6nmew4SiOjxqL2KRpK20fjnjVbpNDjJ2HR3MoVcWKXwbVvzS0A==
+  dependencies:
+    compare-func "^2.0.0"
+    lodash "^4.17.15"
+    q "^1.5.1"
+
 conventional-commits-parser@^3.0.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/conventional-commits-parser/-/conventional-commits-parser-3.2.1.tgz#ba44f0b3b6588da2ee9fd8da508ebff50d116ce2"
@@ -3532,6 +3548,11 @@ human-signals@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
+
+husky@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-7.0.1.tgz#579f4180b5da4520263e8713cc832942b48e1f1c"
+  integrity sha512-gceRaITVZ+cJH9sNHqx5tFwbzlLCVxtVZcusME8JYQ8Edy5mpGDOqD8QBCdMhpyo9a+JXddnujQ4rpY2Ff9SJA==
 
 hyphenate-style-name@^1.0.2, hyphenate-style-name@^1.0.3:
   version "1.0.4"
