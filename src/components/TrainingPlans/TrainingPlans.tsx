@@ -1,7 +1,14 @@
 import React from 'react'
-import { SafeAreaView } from 'react-native'
+import { SafeAreaView, TextInput } from 'react-native'
+import styled from 'styled-components'
 
 export interface TrainingPlansProps {}
+
+const TextInputStyled = styled(TextInput)`
+  border-width: 1px;
+  height: 40px;
+  padding: 10px;
+`
 
 const TrainingPlans: React.FunctionComponent<TrainingPlansProps> = ({}) => {
   return (
@@ -9,7 +16,9 @@ const TrainingPlans: React.FunctionComponent<TrainingPlansProps> = ({}) => {
       style={{
         margin: 20,
       }}
-    ></SafeAreaView>
+    >
+      <TextInputStyled placeholder="Exercise" />
+    </SafeAreaView>
   )
 }
 
