@@ -1,7 +1,8 @@
 import React from 'react'
-import { SafeAreaView } from 'react-native'
+import { SafeAreaView, View } from 'react-native'
 import { useImmer } from 'use-immer'
 import { Input, Button } from 'react-native-elements'
+import { Icon } from 'react-native-elements/dist/icons/Icon'
 
 export interface DayExercisesProps {}
 
@@ -18,26 +19,35 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({}) => {
             marginTop: 10,
           }}
         >
-          <Input
-            label={index + 1}
-            placeholder="Exercise"
-            onChangeText={(value) => {
-              setField((draft) => {
-                draft[index] = {
-                  name: value,
-                }
-              })
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginRight: 20,
             }}
-          />
-          <Button
-            onPress={() => {
-              setField((draft) => {
-                draft.splice(index, 1)
-              })
-            }}
-            title="Remove exercise"
-            accessibilityLabel="Click to remove exercise"
-          />
+          >
+            <Input
+              label={index + 1}
+              placeholder="Exercise"
+              onChangeText={(value) => {
+                setField((draft) => {
+                  draft[index] = {
+                    name: value,
+                  }
+                })
+              }}
+            />
+            <Icon
+              color="red"
+              name="delete"
+              onPress={() => {
+                setField((draft) => {
+                  draft.splice(index, 1)
+                })
+              }}
+              accessibilityLabel="Click to remove exercise"
+            />
+          </View>
         </SafeAreaView>
       ))}
       <Button
@@ -48,8 +58,8 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({}) => {
             })
           })
         }}
-        title="Add new exercise"
-        accessibilityLabel="Click to add new exercise"
+        title="Add exercise"
+        accessibilityLabel="Click to add exercise"
       />
     </SafeAreaView>
   )

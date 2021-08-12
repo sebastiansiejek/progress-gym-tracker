@@ -1,6 +1,6 @@
 import React from 'react'
-import { SafeAreaView } from 'react-native'
-import { Text, Button } from 'react-native-elements'
+import { SafeAreaView, View } from 'react-native'
+import { Text, Button, Icon } from 'react-native-elements'
 import { useImmer } from 'use-immer'
 import DayExercises from '../DayExercises'
 
@@ -18,28 +18,39 @@ const TrainingDays: React.FunctionComponent<TrainingDaysProps> = ({}) => {
             marginBottom: 20,
           }}
         >
-          <Text
-            h3
+          <View
             style={{
-              textAlign: 'center',
-              marginBottom: 15,
+              flexDirection: 'row',
+              justifyContent: 'center',
             }}
           >
-            Day {index + 1}
-          </Text>
-          <Button
-            onPress={() => {
-              setField((draft) => {
-                draft.splice(index, 1)
-              })
-            }}
-            title="Remove day"
-            accessibilityLabel="Click to remove day"
-          />
+            <Text
+              h3
+              style={{
+                textAlign: 'center',
+                marginBottom: 15,
+              }}
+            >
+              Day {index + 1}
+            </Text>
+            <Icon
+              color="red"
+              name="delete"
+              onPress={() => {
+                setField((draft) => {
+                  draft.splice(index, 1)
+                })
+              }}
+              accessibilityLabel="Click to remove day"
+            />
+          </View>
           <DayExercises />
         </SafeAreaView>
       ))}
       <Button
+        style={{
+          marginTop: 20,
+        }}
         onPress={() => {
           setField((draft) => {
             draft.push({
