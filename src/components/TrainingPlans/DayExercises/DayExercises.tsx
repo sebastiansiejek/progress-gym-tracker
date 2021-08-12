@@ -20,13 +20,7 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({}) => {
   return (
     <SafeAreaView>
       {fields.map((field, index) => (
-        <SafeAreaView
-          key={index}
-          style={{
-            marginBottom: 10,
-            marginTop: 10,
-          }}
-        >
+        <SafeAreaView key={index}>
           <View
             style={{
               flexDirection: 'row',
