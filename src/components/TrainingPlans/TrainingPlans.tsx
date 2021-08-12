@@ -1,15 +1,10 @@
 import React, { useEffect } from 'react'
-import styled from 'styled-components'
 import { Button, SafeAreaView, TextInput } from 'react-native'
 import { useImmer } from 'use-immer'
+import TextInputStyled from '../../styles/TextInput'
+import TrainingDays from './TrainingDays'
 
 export interface TrainingPlansProps {}
-
-const TextInputStyled = styled(TextInput)`
-  border-width: 1px;
-  height: 40px;
-  padding: 10px;
-`
 
 const TrainingPlans: React.FunctionComponent<TrainingPlansProps> = ({}) => {
   const [fields, setField] = useImmer<Array<{ name: string }>>([])
@@ -24,6 +19,7 @@ const TrainingPlans: React.FunctionComponent<TrainingPlansProps> = ({}) => {
         margin: 20,
       }}
     >
+      <TrainingDays />
       {fields.map((field, index) => (
         <SafeAreaView
           key={index}
