@@ -51,6 +51,7 @@ const TrainingDays: React.FunctionComponent<TrainingDaysProps> = ({}) => {
         style={{
           marginTop: 20,
         }}
+        icon={<Icon name="add" color="white" />}
         onPress={() => {
           setField((draft) => {
             draft.push({

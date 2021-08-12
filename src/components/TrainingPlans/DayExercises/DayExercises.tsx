@@ -58,6 +58,7 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({}) => {
         onPress={addField}
         title="Add exercise"
         accessibilityLabel="Click to add exercise"
+        icon={<Icon name="add" color="white" />}
       />
     </SafeAreaView>
   )
