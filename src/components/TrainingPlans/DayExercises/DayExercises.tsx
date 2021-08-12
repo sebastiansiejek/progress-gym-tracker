@@ -9,6 +9,14 @@ export interface DayExercisesProps {}
 const DayExercises: React.FunctionComponent<DayExercisesProps> = ({}) => {
   const [fields, setField] = useImmer<Array<{ name: string }>>([])
 
+  const addField = () => {
+    setField((draft) => {
+      draft.push({
+        name: '',
+      })
+    })
+  }
+
   return (
     <SafeAreaView>
       {fields.map((field, index) => (
@@ -28,7 +36,9 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({}) => {
           >
             <Input
               label={index + 1}
+              autoFocus
               placeholder="Exercise"
+              onSubmitEditing={addField}
               onChangeText={(value) => {
                 setField((draft) => {
                   draft[index] = {
@@ -51,13 +61,7 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({}) => {
         </SafeAreaView>
       ))}
       <Button
-        onPress={() => {
-          setField((draft) => {
-            draft.push({
-              name: '',
-            })
-          })
-        }}
+        onPress={addField}
         title="Add exercise"
         accessibilityLabel="Click to add exercise"
       />
