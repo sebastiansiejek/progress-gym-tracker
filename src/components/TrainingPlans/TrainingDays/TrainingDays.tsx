@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, SafeAreaView, Text } from 'react-native'
 import { useImmer } from 'use-immer'
+import DayExercises from '../DayExercises'
 
 export interface TrainingDaysProps {}
 
@@ -16,7 +17,7 @@ const TrainingDays: React.FunctionComponent<TrainingDaysProps> = ({}) => {
             marginBottom: 10,
           }}
         >
-          <Text>{index + 1}</Text>
+          <Text>Day {index + 1}</Text>
           <Button
             onPress={() => {
               setField((draft) => {
@@ -27,6 +28,7 @@ const TrainingDays: React.FunctionComponent<TrainingDaysProps> = ({}) => {
             title="Remove day"
             accessibilityLabel="Click to remove day"
           />
+          <DayExercises />
         </SafeAreaView>
       ))}
       <Button
