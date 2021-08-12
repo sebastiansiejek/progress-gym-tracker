@@ -1,7 +1,7 @@
 import React from 'react'
 import { SafeAreaView, View } from 'react-native'
 import { useImmer } from 'use-immer'
-import { Input, Button } from 'react-native-elements'
+import { Input, Button, Text } from 'react-native-elements'
 import { Icon } from 'react-native-elements/dist/icons/Icon'
 
 export interface DayExercisesProps {}
@@ -21,26 +21,54 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({}) => {
     <SafeAreaView>
       {fields.map((field, index) => (
         <SafeAreaView key={index}>
+          <Text
+            h4
+            style={{
+              textAlign: 'center',
+            }}
+          >
+            Exercise {index + 1}
+          </Text>
           <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
-              marginRight: 20,
             }}
           >
-            <Input
-              label={index + 1}
-              autoFocus
-              placeholder="Exercise"
-              onSubmitEditing={addField}
-              onChangeText={(value) => {
-                setField((draft) => {
-                  draft[index] = {
-                    name: value,
-                  }
-                })
+            <View
+              style={{
+                flex: 2,
               }}
-            />
+            >
+              <Input
+                autoFocus
+                placeholder="Exercise"
+                style={{
+                  flex: 1,
+                }}
+                onSubmitEditing={addField}
+                onChangeText={(value) => {
+                  setField((draft) => {
+                    draft[index] = {
+                      name: value,
+                    }
+                  })
+                }}
+              />
+            </View>
+            <View
+              style={{
+                flex: 1,
+              }}
+            >
+              <Input
+                style={{
+                  flex: 1,
+                }}
+                placeholder="Rep"
+                keyboardType="numeric"
+              />
+            </View>
             <Icon
               color="red"
               name="delete"
