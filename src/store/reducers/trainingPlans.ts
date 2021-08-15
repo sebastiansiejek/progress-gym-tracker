@@ -58,11 +58,11 @@ export const trainingPlansSlice = createSlice({
       action: PayloadAction<{ dayId: string; id: string }>
     ) => {
       const day = findDay(state, action.payload.dayId)
-
-      day.exercises.splice(
-        day.exercises.findIndex(({ id }) => id === action.payload.id),
-        1
+      const exerciseIndex = day.exercises.findIndex(
+        ({ id }) => id === action.payload.id
       )
+
+      delete day.exercises[exerciseIndex]
     },
     updateExercise: (
       state,
