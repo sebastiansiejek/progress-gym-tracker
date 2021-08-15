@@ -50,7 +50,7 @@ const TrainingDays: React.FunctionComponent<TrainingDaysProps> = ({}) => {
               accessibilityLabel="Click to remove day"
             />
           </View>
-          <DayExercises />
+          <DayExercises dayId={id} />
         </SafeAreaView>
       ))}
       <Button

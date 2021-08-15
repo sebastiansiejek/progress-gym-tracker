@@ -1,25 +1,26 @@
 import React from 'react'
 import { SafeAreaView, View } from 'react-native'
-import { useImmer } from 'use-immer'
 import { Input, Button, Text } from 'react-native-elements'
 import { Icon } from 'react-native-elements/dist/icons/Icon'
+import { useDispatch, useSelector } from 'react-redux'
+import { addExercise } from '../../../store/reducers/trainingPlans'
+import { RootState } from '../../../store/store'
 
-export interface DayExercisesProps {}
+export interface DayExercisesProps {
+  dayId: string
+}
 
-const DayExercises: React.FunctionComponent<DayExercisesProps> = ({}) => {
-  const [fields, setField] = useImmer<Array<{ name: string }>>([])
+const DayExercises: React.FunctionComponent<DayExercisesProps> = ({
+  dayId,
+}) => {
+  const trainingPlans = useSelector((state: RootState) => state.trainingPlans)
 
-  const addField = () => {
-    setField((draft) => {
-      draft.push({
-        name: '',
-      })
-    })
-  }
+  const dispatch = useDispatch()
+  const dayExercises = trainingPlans.find(({ id }) => id === dayId)?.exercises
 
   return (
     <SafeAreaView>
-      {fields.map((field, index) => (
+      {dayExercises?.map((field, index) => (
         <SafeAreaView key={index}>
           <Text
             h4
@@ -46,14 +47,17 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({}) => {
                 style={{
                   flex: 1,
                 }}
-                onSubmitEditing={addField}
-                onChangeText={(value) => {
-                  setField((draft) => {
-                    draft[index] = {
-                      name: value,
-                    }
-                  })
-                }}
+                // onSubmitEditing={(value) => dispatch(addExercise({
+                //   id: value,
+                //   name: '',
+                // }))}
+                // onChangeText={(value) => {
+                //   setField((draft) => {
+                //     draft[index] = {
+                //       name: value,
+                //     }
+                //   })
+                // }}
               />
             </View>
             <View
@@ -73,9 +77,9 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({}) => {
               color="red"
               name="delete"
               onPress={() => {
-                setField((draft) => {
-                  draft.splice(index, 1)
-                })
+                // setField((draft) => {
+                //   draft.splice(index, 1)
+                // })
               }}
               accessibilityLabel="Click to remove exercise"
             />
@@ -83,7 +87,16 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({}) => {
         </SafeAreaView>
       ))}
       <Button
-        onPress={addField}
+        onPress={() =>
+          dispatch(
+            addExercise({
+              dayId: dayId,
+              name: '',
+              rep: 0,
+              series: 0,
+            })
+          )
+        }
         title="Add exercise"
         accessibilityLabel="Click to add exercise"
         icon={<Icon name="add" color="white" />}
