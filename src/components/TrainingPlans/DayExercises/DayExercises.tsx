@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   addExercise,
   deleteExercise,
+  updateExercise,
 } from '../../../store/reducers/trainingPlans'
 import { RootState } from '../../../store/store'
 
@@ -54,13 +55,15 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({
                 //   id: value,
                 //   name: '',
                 // }))}
-                // onChangeText={(value) => {
-                //   setField((draft) => {
-                //     draft[index] = {
-                //       name: value,
-                //     }
-                //   })
-                // }}
+                onChangeText={(value) => {
+                  dispatch(
+                    updateExercise({
+                      dayId,
+                      id,
+                      name: value,
+                    })
+                  )
+                }}
               />
             </View>
             <View

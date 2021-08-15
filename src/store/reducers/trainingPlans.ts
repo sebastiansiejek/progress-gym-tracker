@@ -64,6 +64,26 @@ export const trainingPlansSlice = createSlice({
         1
       )
     },
+    updateExercise: (
+      state,
+      action: PayloadAction<{ dayId: string } & Partial<exercise>>
+    ) => {
+      const { dayId, id } = action.payload
+
+      if (id) {
+        const exercise = findExercise(state, dayId, id)
+
+        const day = findDay(state, dayId)
+
+        if (day) {
+          delete action.payload['id']
+          const updatedExercise = { ...exercise, ...action.payload }
+          const exerciseIndex = day.exercises.findIndex(({ id }) => id === id)
+
+          day.exercises[exerciseIndex] = updatedExercise
+        }
+      }
+    },
   },
 })
 
@@ -88,7 +108,12 @@ const findExercise = (state: TrainingPlansState, dayId: string, id: string) => {
   return exercise
 }
 
-export const { addDay, deleteDay, addExercise, deleteExercise } =
-  trainingPlansSlice.actions
+export const {
+  addDay,
+  deleteDay,
+  addExercise,
+  deleteExercise,
+  updateExercise,
+} = trainingPlansSlice.actions
 
 export default trainingPlansSlice.reducer
