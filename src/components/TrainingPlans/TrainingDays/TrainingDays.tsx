@@ -1,17 +1,21 @@
 import React from 'react'
 import { SafeAreaView, View } from 'react-native'
 import { Text, Button, Icon } from 'react-native-elements'
-import { useImmer } from 'use-immer'
+import { useDispatch, useSelector } from 'react-redux'
+import { addDay, deleteDay } from '../../../store/reducers/trainingPlans'
+import { RootState } from '../../../store/store'
 import DayExercises from '../DayExercises'
 
 export interface TrainingDaysProps {}
 
 const TrainingDays: React.FunctionComponent<TrainingDaysProps> = ({}) => {
-  const [fields, setField] = useImmer<Array<{ name: string }>>([])
+  const trainingPlans = useSelector((state: RootState) => state.trainingPlans)
+
+  const dispatch = useDispatch()
 
   return (
     <SafeAreaView>
-      {fields.map((field, index) => (
+      {trainingPlans.map(({ id }, index) => (
         <SafeAreaView
           key={index}
           style={{
@@ -37,9 +41,11 @@ const TrainingDays: React.FunctionComponent<TrainingDaysProps> = ({}) => {
               color="red"
               name="delete"
               onPress={() => {
-                setField((draft) => {
-                  draft.splice(index, 1)
-                })
+                dispatch(
+                  deleteDay({
+                    id,
+                  })
+                )
               }}
               accessibilityLabel="Click to remove day"
             />
@@ -53,11 +59,11 @@ const TrainingDays: React.FunctionComponent<TrainingDaysProps> = ({}) => {
         }}
         icon={<Icon name="add" color="white" />}
         onPress={() => {
-          setField((draft) => {
-            draft.push({
+          dispatch(
+            addDay({
               name: '',
             })
-          })
+          )
         }}
         title="Add training day"
         accessibilityLabel="Click to add training day"
