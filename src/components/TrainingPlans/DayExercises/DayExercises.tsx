@@ -3,7 +3,10 @@ import { SafeAreaView, View } from 'react-native'
 import { Input, Button, Text } from 'react-native-elements'
 import { Icon } from 'react-native-elements/dist/icons/Icon'
 import { useDispatch, useSelector } from 'react-redux'
-import { addExercise } from '../../../store/reducers/trainingPlans'
+import {
+  addExercise,
+  deleteExercise,
+} from '../../../store/reducers/trainingPlans'
 import { RootState } from '../../../store/store'
 
 export interface DayExercisesProps {
@@ -20,7 +23,7 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({
 
   return (
     <SafeAreaView>
-      {dayExercises?.map((field, index) => (
+      {dayExercises?.map(({ id }, index) => (
         <SafeAreaView key={index}>
           <Text
             h4
@@ -77,9 +80,7 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({
               color="red"
               name="delete"
               onPress={() => {
-                // setField((draft) => {
-                //   draft.splice(index, 1)
-                // })
+                dispatch(deleteExercise({ dayId, id }))
               }}
               accessibilityLabel="Click to remove exercise"
             />
