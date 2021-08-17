@@ -53,6 +53,7 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({
                 }}
                 value={name}
                 defaultValue={name}
+                label="Name"
                 onSubmitEditing={() =>
                   dispatch(
                     addExercise({
@@ -84,6 +85,7 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({
                   flex: 1,
                 }}
                 placeholder="Rep"
+                label="Rep"
                 value={`${rep}`}
                 defaultValue={`0`}
                 keyboardType="numeric"
