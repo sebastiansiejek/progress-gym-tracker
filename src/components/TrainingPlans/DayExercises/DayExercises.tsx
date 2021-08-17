@@ -24,7 +24,7 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({
 
   return (
     <SafeAreaView>
-      {dayExercises?.map(({ id }, index) => (
+      {dayExercises?.map(({ id, name }, index) => (
         <SafeAreaView key={index}>
           <Text
             h4
@@ -51,6 +51,7 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({
                 style={{
                   flex: 1,
                 }}
+                defaultValue={name}
                 onSubmitEditing={() =>
                   dispatch(
                     addExercise({
