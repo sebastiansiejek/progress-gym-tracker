@@ -24,7 +24,7 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({
 
   return (
     <SafeAreaView>
-      {dayExercises?.map(({ id, name, rep }, index) => (
+      {dayExercises?.map(({ id, name, rep, series }, index) => (
         <SafeAreaView key={index}>
           <Text
             h4
@@ -42,15 +42,12 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({
           >
             <View
               style={{
-                flex: 2,
+                flex: 1,
               }}
             >
               <Input
                 autoFocus
                 placeholder="Exercise"
-                style={{
-                  flex: 1,
-                }}
                 value={name}
                 defaultValue={name}
                 label="Name"
@@ -75,15 +72,18 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({
                 }}
               />
             </View>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+            }}
+          >
             <View
               style={{
                 flex: 1,
               }}
             >
               <Input
-                style={{
-                  flex: 1,
-                }}
                 placeholder="Rep"
                 label="Rep"
                 value={`${rep}`}
@@ -95,6 +95,28 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({
                       dayId,
                       id,
                       rep: parseInt(value, 10),
+                    })
+                  )
+                }}
+              />
+            </View>
+            <View
+              style={{
+                flex: 1,
+              }}
+            >
+              <Input
+                placeholder="Series"
+                label="Series"
+                value={`${series}`}
+                defaultValue={`0`}
+                keyboardType="numeric"
+                onChangeText={(value) => {
+                  dispatch(
+                    updateExercise({
+                      dayId,
+                      id,
+                      series: parseInt(value, 10),
                     })
                   )
                 }}
