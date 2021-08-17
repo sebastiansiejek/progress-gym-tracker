@@ -54,10 +54,9 @@ export const trainingPlansSlice = createSlice({
       state,
       action: PayloadAction<{ dayId: string; id: string }>
     ) => {
-      const day = findDay(state, action.payload.dayId)
-      const exerciseIndex = day.exercises.findIndex(
-        ({ id }) => id === action.payload.id
-      )
+      const { dayId, id } = action.payload
+      const day = findDay(state, dayId)
+      const exerciseIndex = findExerciseIndex(state, dayId, id)
 
       day.exercises.splice(exerciseIndex, 1)
     },
@@ -70,15 +69,10 @@ export const trainingPlansSlice = createSlice({
       if (id) {
         const exercise = findExercise(state, dayId, id)
         const day = findDay(state, dayId)
+        const updatedExercise = { ...exercise, ...action.payload }
+        const exerciseIndex = findExerciseIndex(state, dayId, id)
 
-        if (day) {
-          const updatedExercise = { ...exercise, ...action.payload }
-          const exerciseIndex = day.exercises.findIndex(
-            (exercise) => exercise.id === id
-          )
-
-          day.exercises[exerciseIndex] = updatedExercise
-        }
+        day.exercises[exerciseIndex] = updatedExercise
       }
     },
   },
@@ -97,22 +91,35 @@ const findDayIndex = (state: TrainingPlansState, id: string) => {
 const findDay = (state: TrainingPlansState, id: string) => {
   const dayIndex = findDayIndex(state, id)
 
-  if (dayIndex > -1) {
-    return state[dayIndex]
+  return state[dayIndex]
+}
+
+const findExerciseIndex = (
+  state: TrainingPlansState,
+  dayId: string,
+  exerciseId: string
+) => {
+  const day = findDay(state, dayId)
+  const exerciseIndex = day.exercises.findIndex(
+    (exercise) => exercise.id === exerciseId
+  )
+
+  if (exerciseIndex > -1) {
+    return exerciseIndex
   } else {
-    throw `Day id: <${id}> not found`
+    throw `Exercise id: <${exerciseId}> not found`
   }
 }
 
-const findExercise = (state: TrainingPlansState, dayId: string, id: string) => {
-  const day = findDay(state, dayId)
-  const exercise = day.exercises.find((exercise) => exercise.id === id)
+const findExercise = (
+  state: TrainingPlansState,
+  dayId: string,
+  exerciseId: string
+) => {
+  const dayIndex = findDayIndex(state, dayId)
+  const exerciseIndex = findExerciseIndex(state, dayId, exerciseId)
 
-  if (!exercise) {
-    throw `Exercise id: <${id}> not found`
-  }
-
-  return exercise
+  return state[dayIndex].exercises[exerciseIndex]
 }
 
 export const {
