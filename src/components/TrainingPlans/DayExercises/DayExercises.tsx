@@ -9,6 +9,7 @@ import {
   updateExercise,
 } from '../../../store/reducers/trainingPlans'
 import { RootState } from '../../../store/store'
+import Swipeout from 'react-native-swipeout'
 
 export interface DayExercisesProps {
   dayId: string
@@ -30,107 +31,107 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({
             h4
             style={{
               textAlign: 'center',
+              marginBottom: 20,
             }}
           >
             Exercise {index + 1}
           </Text>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
+          <Swipeout
+            right={[
+              {
+                text: 'Delete',
+                type: 'delete',
+                onPress: () => {
+                  dispatch(deleteExercise({ dayId, id }))
+                },
+              },
+            ]}
           >
             <View
               style={{
-                flex: 1,
+                flexDirection: 'row',
+                alignItems: 'center',
+                backgroundColor: '#fff',
               }}
             >
-              <Input
-                autoFocus
-                placeholder="Exercise"
-                value={name}
-                defaultValue={name}
-                label="Name"
-                onSubmitEditing={() =>
-                  dispatch(
-                    addExercise({
-                      dayId: dayId,
-                      name: '',
-                      rep: 0,
-                      series: 0,
-                    })
-                  )
-                }
-                onChangeText={(value) => {
-                  dispatch(
-                    updateExercise({
-                      dayId,
-                      id,
-                      name: value,
-                    })
-                  )
+              <View
+                style={{
+                  flex: 2,
                 }}
-              />
-            </View>
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-            }}
-          >
-            <View
-              style={{
-                flex: 1,
-              }}
-            >
-              <Input
-                placeholder="Rep"
-                label="Rep"
-                value={`${rep}`}
-                defaultValue={`0`}
-                keyboardType="numeric"
-                onChangeText={(value) => {
-                  dispatch(
-                    updateExercise({
-                      dayId,
-                      id,
-                      rep: parseInt(value, 10),
-                    })
-                  )
+              >
+                <Input
+                  autoFocus
+                  placeholder="Exercise"
+                  value={name}
+                  defaultValue={name}
+                  label="Name"
+                  onSubmitEditing={() =>
+                    dispatch(
+                      addExercise({
+                        dayId: dayId,
+                        name: '',
+                        rep: 0,
+                        series: 0,
+                      })
+                    )
+                  }
+                  onChangeText={(value) => {
+                    dispatch(
+                      updateExercise({
+                        dayId,
+                        id,
+                        name: value,
+                      })
+                    )
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  flex: 1,
                 }}
-              />
-            </View>
-            <View
-              style={{
-                flex: 1,
-              }}
-            >
-              <Input
-                placeholder="Series"
-                label="Series"
-                value={`${series}`}
-                defaultValue={`0`}
-                keyboardType="numeric"
-                onChangeText={(value) => {
-                  dispatch(
-                    updateExercise({
-                      dayId,
-                      id,
-                      series: parseInt(value, 10),
-                    })
-                  )
+              >
+                <Input
+                  placeholder="Rep"
+                  label="Rep"
+                  value={`${rep}`}
+                  defaultValue={`0`}
+                  keyboardType="numeric"
+                  onChangeText={(value) => {
+                    dispatch(
+                      updateExercise({
+                        dayId,
+                        id,
+                        rep: parseInt(value, 10),
+                      })
+                    )
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  flex: 1,
                 }}
-              />
+              >
+                <Input
+                  placeholder="Series"
+                  label="Series"
+                  value={`${series}`}
+                  defaultValue={`0`}
+                  keyboardType="numeric"
+                  onChangeText={(value) => {
+                    dispatch(
+                      updateExercise({
+                        dayId,
+                        id,
+                        series: parseInt(value, 10),
+                      })
+                    )
+                  }}
+                />
+              </View>
             </View>
-            <Icon
-              color="red"
-              name="delete"
-              onPress={() => {
-                dispatch(deleteExercise({ dayId, id }))
-              }}
-              accessibilityLabel="Click to remove exercise"
-            />
-          </View>
+          </Swipeout>
         </SafeAreaView>
       ))}
       <Button
