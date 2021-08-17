@@ -62,7 +62,7 @@ export const trainingPlansSlice = createSlice({
         ({ id }) => id === action.payload.id
       )
 
-      delete day.exercises[exerciseIndex]
+      day.exercises.splice(exerciseIndex, 1)
     },
     updateExercise: (
       state,
