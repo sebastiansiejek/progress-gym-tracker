@@ -51,10 +51,16 @@ const DayExercises: React.FunctionComponent<DayExercisesProps> = ({
                 style={{
                   flex: 1,
                 }}
-                // onSubmitEditing={(value) => dispatch(addExercise({
-                //   id: value,
-                //   name: '',
-                // }))}
+                onSubmitEditing={() =>
+                  dispatch(
+                    addExercise({
+                      dayId: dayId,
+                      name: '',
+                      rep: 0,
+                      series: 0,
+                    })
+                  )
+                }
                 onChangeText={(value) => {
                   dispatch(
                     updateExercise({
