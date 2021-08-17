@@ -27,18 +27,15 @@ export const trainingPlansSlice = createSlice({
       state.push({ id, name, exercises: [] })
     },
     deleteDay: (state, action: PayloadAction<{ id: string }>) => {
-      state.splice(
-        state.findIndex(({ id }) => id === action.payload.id),
-        1
-      )
+      const dayIndex = findDayIndex(state, action.payload.id)
+      state.splice(dayIndex, 1)
     },
     addExercise: (
       state,
       action: PayloadAction<{ dayId: string } & Omit<exercise, 'id'>>
     ) => {
       const { dayId, name, rep, series } = action.payload
-
-      const dayIndex = state.findIndex(({ id }) => id === dayId)
+      const dayIndex = findDayIndex(state, dayId)
 
       if (dayIndex > -1) {
         const id = nanoid()
@@ -72,7 +69,6 @@ export const trainingPlansSlice = createSlice({
 
       if (id) {
         const exercise = findExercise(state, dayId, id)
-
         const day = findDay(state, dayId)
 
         if (day) {
@@ -88,8 +84,18 @@ export const trainingPlansSlice = createSlice({
   },
 })
 
+const findDayIndex = (state: TrainingPlansState, id: string) => {
+  const dayIndex = state.findIndex((day) => day.id === id)
+
+  if (dayIndex > -1) {
+    return dayIndex
+  } else {
+    throw `Day id: <${id}> not found`
+  }
+}
+
 const findDay = (state: TrainingPlansState, id: string) => {
-  const dayIndex = state.findIndex(({ id }) => id === id)
+  const dayIndex = findDayIndex(state, id)
 
   if (dayIndex > -1) {
     return state[dayIndex]
