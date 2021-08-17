@@ -106,7 +106,7 @@ const findDay = (state: TrainingPlansState, id: string) => {
 
 const findExercise = (state: TrainingPlansState, dayId: string, id: string) => {
   const day = findDay(state, dayId)
-  const exercise = day.exercises.find(({ id }) => id === id)
+  const exercise = day.exercises.find((exercise) => exercise.id === id)
 
   if (!exercise) {
     throw `Exercise id: <${id}> not found`
